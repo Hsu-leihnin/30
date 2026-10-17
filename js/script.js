@@ -50,20 +50,39 @@ openEnvelope.addEventListener("click", () => {
   intro.classList.add("opening");
   flowerTransition.classList.add("show");
   launchOrchids();
+
+const flowerCloud = flowerTransition.querySelector(".flower-cloud");
+const flowerImages = [...flowerCloud.querySelectorAll("img")];
+
+Promise.all(
+  flowerImages.map((img) => {
+    if (img.complete && img.naturalWidth > 0) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      img.onload = resolve;
+      img.onerror = resolve;
+    });
+  })
+).then(() => {
   window.setTimeout(() => {
     intro.style.opacity = "0";
     intro.style.transform = "scale(.96)";
   }, 450);
+
   window.setTimeout(() => {
     intro.style.display = "none";
     flowerTransition.classList.remove("show");
     mainPage.classList.remove("d-none");
     mainPage.classList.add("page-fade-in");
     window.scrollTo({ top: 0, behavior: "smooth" });
+
     window.setTimeout(() => {
-        mainPage.classList.remove("page-fade-in");
+      mainPage.classList.remove("page-fade-in");
     }, 1500);
-}, 4000);
+  }, 4000);
+});
 });
 
 function chooseSong(index, autoplay = false) {
