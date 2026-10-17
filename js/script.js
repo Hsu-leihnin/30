@@ -17,6 +17,7 @@ const songChoices = [...document.querySelectorAll(".song-choice")];
 const cassetteScene = document.querySelector(".cassette-scene");
 let currentSong = 0;
 let isPlaying = false;
+let isReady = false;
 
 function launchOrchids() {
   const flowerFiles =[
@@ -45,8 +46,44 @@ function launchOrchids() {
     cloud.appendChild(flower);
   }
 }
+function preloadFlowerImages() {
+  const flowerFiles = [
+    "assets/images/H.png",
+    "assets/images/E.png",
+    "assets/images/I.png",
+    "assets/images/N.png",
+    "assets/images/T.png",
+    "assets/images/H(2).png",
+    "assets/images/U.png",
+    "assets/images/R.png",
+    "assets/images/A.png"
+  ];
+
+  return Promise.all(
+    flowerFiles.map(src => new Promise(resolve => {
+      const img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve;
+      img.src = src;
+
+      if (img.complete) resolve();
+    }))
+  );
+}
+
+async function initializeWebsite() {
+  await preloadFlowerImages();
+  isReady = true;
+
+  const pageLoader = document.getElementById("pageLoader");
+
+  if (pageLoader) {
+    pageLoader.classList.add("hidden");
+  }
+}
+
 openEnvelope.addEventListener("click", () => {
-  if (intro.classList.contains("opening")) return;
+  if (!isReady||intro.classList.contains("opening")) return;
   intro.classList.add("opening");
   flowerTransition.classList.add("show");
   launchOrchids();
@@ -126,3 +163,4 @@ audioPlayer.addEventListener("ended", () => setPlaying(false));
 audioPlayer.addEventListener("pause", () => { if (isPlaying) setPlaying(false); });
 audioPlayer.addEventListener("play", () => setPlaying(true));
 
+initializeWebsite();
