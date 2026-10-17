@@ -25,7 +25,7 @@ button{font:inherit}
 .intro-screen.opening .envelope-flap{transform:rotateX(180deg)}.intro-screen.opening .envelope-seal{opacity:0;transition:opacity .25s}
 .flower-transition{position:fixed;z-index:20;inset:0;display:none;place-items:center;overflow:hidden;background:#f7eddb}
 .flower-transition.show{display:grid}
-.flower-cloud{position:absolute;inset:-30%;transform:scale(.05);opacity:0;background:
+.flower-cloud{position:absolute;inset:-50%;transform:scale(.05);opacity:0;background:
  radial-gradient(ellipse at 15% 20%,#e9a8bb 0 7%,transparent 8%),
  radial-gradient(ellipse at 19% 23%,#f7cbd2 0 8%,transparent 9%),
  radial-gradient(ellipse at 80% 20%,#c96e87 0 8%,transparent 9%),
@@ -43,7 +43,7 @@ button{font:inherit}
  filter:blur(1px);transition:transform 1.2s cubic-bezier(.2,.7,.1,1),opacity .3s}
 
  
-.flower-transition.show .flower-cloud{opacity:1;transform:scale(1.5)}
+.flower-transition.show .flower-cloud{opacity:1;transform:scale(1)}
 .flower-caption{position:relative;z-index:2;font-family:"Great Vibes",cursive;font-size:clamp(30px,6vw,58px);color:#7c0a0a;text-shadow:0 2px 10px #96596e55;opacity:0;animation:captionIn 1s 1s forwards}
 @keyframes captionIn{to{opacity:1}}
 .main-page{min-height:100svh;position:relative;overflow:hidden;background:#eadbca}
